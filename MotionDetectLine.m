@@ -42,9 +42,8 @@ vidLine = vid(:, 100, :);
 %Get rid of redundant dimension
 vidLine = permute(vidLine, [1 3 2]);
 
-reference = createReference(vidLine);
-[~, grad] = imgradientxy(reference);
-displacement = calculateDisplacements(vidLine, grad);
+
+displacement = calculateDisplacements(vidLine);
 
 %Display output
 imshow(vidLine, [0 255]);
