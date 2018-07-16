@@ -1,2 +1,2 @@
 addpath(fullfile(pwd, 'videos'));
-addpath(fullfile(pwd, 'functions'));
+addpath(genpath(fullfile(pwd, 'functions')));

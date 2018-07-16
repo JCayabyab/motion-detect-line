@@ -8,6 +8,9 @@ fileDesc = ['Video files (*.avi; *.mp4; *.mov; *.wmv; *.asf; *.asx; *.m4v; *.mj2
 
 [fileName, filePath] = uigetfile({fileTypes, fileDesc});
 
+if(fileName == 0)
+    return;
+end
 
 end
 

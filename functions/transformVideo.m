@@ -3,20 +3,20 @@ function outputLine = transformVideo(vid)
 %   Detailed explanation goes here
 
 %% Crop the video to specifications needed
-% Note: inputs for cropVideo: cropVideo(inputVideo, width-low, width-high,
-% height-low, height-high)
 
-vid = cropVideo(vid, 200, 400, 150, 200, 200, 250);
+vid = cropVideo(vid);
 
 %% Apply effects to video
 
-% Turns RBG 4-D matrix to grayscale Intensity matrix
+% Turns RBG 4-D matrix to 3-D grayscale Intensity matrix
 vid = grayscaleVideo(vid);
 
 %% Turn into Video Feed for a row of pixels over time
 
-%Obtain selected column of pixels
-outputLine = vid(:, 100, :);
+%Obtain middle column of pixels
+[~, columns, ~] = size(vid);
+column = floor(columns/2);
+outputLine = vid(:, column, :);
 %Get rid of redundant dimension
 outputLine = permute(outputLine, [1 3 2]);
 

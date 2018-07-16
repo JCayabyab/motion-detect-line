@@ -8,8 +8,8 @@ reference = createReference(input);
 [~, t] = size(input);
 displacement = zeros(t, 1);
 
-i = mink(grad(:, 1), 1, 1);
-a = find(grad(:, 1) == i);
+i = mink(grad(:, 1), 1, 1); % finds most negative gradient value
+a = find(grad(:, 1) == i); %returns the row of highest gradient i.e. edge
 
 for j = 1:t
     pixelDifference = double(input(a, 1)) - double(input(a, j));%from formula (top)
