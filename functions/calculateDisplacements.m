@@ -1,8 +1,6 @@
 function [displacement] = calculateDisplacements(input)
-% CALCULATEDISPLACEMENTS Input a line-time photo, a dI/dy gradient of the
-% reference
+% CALCULATEDISPLACEMENTS Input a line-time photo
 % Outputs a displacement-time relationship
-% This function assumes that gradient and input are the same size
 
 reference = createReference(input);
 [~, grad] = imgradientxy(reference);
