@@ -1,10 +1,6 @@
-function outputLine = transformVideo(vr)
-%TRANSFORMVIDEO Transforms a VideoReader object to a single pixel line.
+function outputLine = transformVideo(vid)
+%TRANSFORMVIDEO Transforms a RGB video to a single pixel line.
 %   Detailed explanation goes here
-%% Read the video from the .mp4 file
-
-v = VideoReader(vr);
-vid = v.read();
 
 %% Crop the video to specifications needed
 % Note: inputs for cropVideo: cropVideo(inputVideo, width-low, width-high,
