@@ -1,0 +1,11 @@
+function [fileName,filePath] = getFile()
+%GETFILE Prompts user for file and saves name and path to variables.
+%   
+fileTypes = ['Videos (*.avi; *.mp4; *.mov; *.wmv; *.asf; *.asx; *.m4v; '...
+    '*.mj2; *.mpg '];
+
+[fileName, filePath] = uigetfile(fileTypes);
+
+
+end
+
