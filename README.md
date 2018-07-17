@@ -1,4 +1,4 @@
-#MotionDetectVideo
+# MotionDetectVideo
 
 MotionDetectVideo is a MATLAB program used to detect an edge, then applying an algorithm to extract displacement signals from a video.
 
