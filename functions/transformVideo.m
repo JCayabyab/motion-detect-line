@@ -1,10 +1,14 @@
-function outputLine = transformVideo(vid)
+function [outputLine, angle] = transformVideo(vid)
 %TRANSFORMVIDEO Transforms a RGB video to a single pixel line.
 %   Detailed explanation goes here
 
 %% Crop the video to specifications needed
 
 vid = cropVideo(vid);
+
+%% Get angle of rotation
+
+angle = getAngle(vid(:,:,:,1));
 
 %% Apply effects to video
 

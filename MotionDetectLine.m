@@ -6,12 +6,16 @@ clear;
 
 [video, Fs] = getVideo();
 
-vidLine = transformVideo(video);
-displacement = calculateDisplacements(vidLine);
+[vidLine, angle] = transformVideo(video);
+displacement = calculateDisplacements(vidLine, angle);
 
 %Display output
 imshow(vidLine, [0 255]);
-figure;
+figure('Name', 'Displacement-Time Graph');
 plot(displacement);
-figure;
+title('Displacement of Edge vs Time');
+xlabel('Time (Frames)')
+ylabel('Displacement (Pixels)')
+
+figure('Name', 'Displacement-Frequency Graph');
 obtainFourierDomain(Fs, displacement);
