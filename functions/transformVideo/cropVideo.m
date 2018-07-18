@@ -3,8 +3,10 @@ function outputVideo = cropVideo(inputVideo)
 
 [firstFrame, lastFrame] = getFrames(inputVideo);
 
-    
+figure('Name','Draw rectangle to crop image:');
 [~, dims] = imcrop(inputVideo(:,:,:,firstFrame));
+close;
+
 xmin = floor(dims(1))+1;
 ymin = floor(dims(2))+1;
 width = floor(dims(3));

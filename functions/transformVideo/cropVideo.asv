@@ -1,50 +1,11 @@
 function outputVideo = cropVideo(inputVideo)
 %CROPVIDEO This function crops a video
 
-[~, ~, ~, frames] = size(inputVideo);
+[firstFrame, lastFrame] = getFrames(inputVideo);
 
-
-[firstFrame, lastFrame] = getFrames();
-approved = 0;
-
-while (approved == 0)
-    prompt = {sprintf(['Note: This video has %d frames.\n'...
-              'First Frame:'], frames), ...
-              'Last Frame:'};
-    title = 'Enter frames for analysis:';
-    dims = [1 40];
-    definput = {'1', num2str(frames)};
-    userInput = inputdlg(prompt, title, dims, definput);
-
-    userInput = str2double(userInput);
-
-    firstFrame = userInput(1);
-    lastFrame = userInput(2);
-
-    if (isempty(userInput))
-        return;
-    end
-    
-    
-    if(firstFrame > lastFrame || lastFrame > frames)
-        disp('Invalid frame input!');
-        pause(2);
-    else
-        figure('Name', 'Frame Comparison');
-        imshowpair(inputVideo(:,:,:,firstFrame), inputVideo(:,:,:,lastFrame), 'montage');
-        answer = questdlg('Are these frames okay?', 'Frame Check',...
-            'Yes', 'No', 'Yes');
-        switch answer
-            case 'Yes'
-                approved = 1;
-            case 'No'
-                approved = 0;
-        end
-        close('Frame Comparison');
-    end
-end
-    
+figure('Name','Draw ;
 [~, dims] = imcrop(inputVideo(:,:,:,firstFrame));
+
 xmin = floor(dims(1))+1;
 ymin = floor(dims(2))+1;
 width = floor(dims(3));

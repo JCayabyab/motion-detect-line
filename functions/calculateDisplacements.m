@@ -8,7 +8,7 @@ reference = createReference(input);
 [~, t] = size(input);
 displacement = zeros(t, 1);
 
-if (reference(1) < 128)
+if (reference(1) < 100)
     i = maxk(grad(:, 1), 1, 1);
 else
     i = mink(grad(:, 1), 1, 1); % finds most negative gradient value

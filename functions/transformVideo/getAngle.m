@@ -2,14 +2,27 @@ function angle = getAngle(vidFrame)
 %GETANGLE Summary of this function goes here
 %   Detailed explanation goes here
 
-figure('Name','Select Line in Rectangle:');
-[~, dims] = imcrop(vidFrame);
-close;
+answer = questdlg('Is the line parallel to the frame?', 'Angle check:',...
+    'Yes', 'No', 'Yes');
+switch answer
+    case 'Yes'
+        calculateAngle = false;
+    case 'No'
+        calculateAngle = true;
+end
 
-width = dims(3);
-height = dims(4);
+if (calculateAngle)
+    figure('Name','Fit line in selected rectangle:');
+    [~, dims] = imcrop(vidFrame);
+    close;
 
-angle = atan(height/width);
+    width = dims(3);
+    height = dims(4);
+
+    angle = atan(height/width);
+else
+    angle = 0;
+end
 
 end
 
