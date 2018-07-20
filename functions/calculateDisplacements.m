@@ -1,12 +1,13 @@
-function [displacement] = calculateDisplacements(input, angle)
+function [disGraph] = calculateDisplacements(input, angle, frameRate)
 % CALCULATEDISPLACEMENTS Input a line-time photo
 % Outputs a displacement-time relationship
 
 reference = createReference(input);
-[~, grad] = imgradientxy(reference);
+%[~, grad] = imgradientxy(reference);
+[~, grad] = imgradientxy(reference, 'central');
 
-[~, t] = size(input);
-displacement = zeros(t, 1);
+[~, frames] = size(input);
+displacement = zeros(frames, 1);
 
 if (reference(1) < 100)
     i = maxk(grad(:, 1), 1, 1);
@@ -16,7 +17,7 @@ end
 
 a = find(grad(:, 1) == i); %returns the row of highest gradient i.e. edge
 
-for j = 1:t
+for j = 1:frames
     pixelDifference = double(input(a, 1)) - double(input(a, j));%from formula (top)
     s = double(pixelDifference) ./ grad(a, 1); %from formula (bottom)
     displacement(j) = -s; % gradient direction is downwards
@@ -26,5 +27,11 @@ end
 cosine = cos(angle);
 
 displacement = displacement/cosine;
+time = frameRate*(1:frames)/frames;
+time = time';
+
+disGraph = zeros(frames, 2);
+disGraph(:, 1) = displacement;
+disGraph(:, 2) = time;
 
 end

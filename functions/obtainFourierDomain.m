@@ -5,28 +5,24 @@ function freqGraph = obtainFourierDomain(FrameRate,disSignal)
 
 T = 1/FrameRate; %How long for one sample
 [L, ~] = size(disSignal); %how many frames?
-t = (0:L-1)*T;
+%t = (0:L-1)*T;
 
 S = disSignal;
-
-plot(1000*t(1:50),S(1:50))
-title('Signal')
-xlabel('t (milliseconds)')
-ylabel('S(t)')
 
 Y = fft(S);
 
 P2 = abs(Y/L);
-P1 = P2(1:L/2+1);
+P1 = P2(1:floor(L/2)+1);
 P1(2:end-1) = 2*P1(2:end-1);
-f = FrameRate*(0:(L/2))/L;
+f = FrameRate*(0:floor(L/2))/L;
+f = f';
 
-P1(1:3) = 0;
+%Uncomment this line to attentuate frequencies that are near zero:
+%P1(1:3) = 0;
 
-plot(f,P1) 
-title('Single-Sided Amplitude Spectrum of S(t)')
-xlabel('f (Hz)')
-ylabel('|P1(f)|')
+freqGraph = zeros(floor(L/2)+1, 2);
+freqGraph(:,1) = P1;
+freqGraph(:,2) = f;
 
 end
 

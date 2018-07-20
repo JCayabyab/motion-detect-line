@@ -1,16 +1,18 @@
-- Create a method that factors in angle
--> this method could still assume only vertical motion.
--> use trig to amplify motion.
--> apply rotation matrix?
+- Obtain distance from lens to calculate displacement in metres
+  -> Find mm per pixel
+  -> Use angular size
 
-- Obtain focal length and distance from lens to calculate displacement in metres
--> Find mm per pixel
--> Use angular size
+- Figure out gradient units
+-> Allows for accurate pixel measurements
+
+- Create a method that factors in angle
+  -> this method could still assume only vertical motion.
+  -> use trig to amplify motion. DONE
 
 -Differentiate against light background and dark string vs dark background and light string
--> return topmost value in grad
--> if below a certain threshhold, black background
--> if above a certain threshhold, white background
+  -> return topmost value in grad
+  -> if below a certain threshhold, black background
+  -> if above a certain threshhold, white background 
+    -> if black background, find max and multiply by -1
+    -> if white background, find min DONE
 
--> if black background, find max and multiply by -1
--> if white background, find min

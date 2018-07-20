@@ -14,12 +14,12 @@ height = floor(dims(4));
 
 xmax = xmin + width;
 ymax = ymin + height;
-newLength = lastFrame - firstFrame;
+newLength = lastFrame - firstFrame + 1;
 
 vid = zeros(height + 1, width + 1, 3, newLength, 'uint8');
 
 for i = 1:newLength
-    j = i + firstFrame;
+    j = i - 1 + firstFrame;
     currentFrame = inputVideo(ymin:ymax,xmin:xmax,:,j);
     vid(:,:,:,i) = currentFrame;
 end
