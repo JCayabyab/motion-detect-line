@@ -2,24 +2,17 @@ function [disGraph] = calculateDisplacements(input, frameRate)
 % CALCULATEDISPLACEMENTS Input a line-time photo
 % Outputs a displacement-time relationship
 
-reference = createReference(input);
+% reference = createReference(input);
+% vid(:, :, 1) = reference;
 
-[~, frames] = size(input);
+[~, ~, frames] = size(input);
 displacement = zeros(frames, 1);
 
-if (reference(1) < 100)
-    i = maxk(grad(:, 1), 1, 1);
-else
-    i = mink(grad(:, 1), 1, 1); % finds most negative gradient value
-end
-
-a = find(grad(:, 1) == i); %returns the row of highest gradient i.e. edge
+f = initializeLoadingBar();
 
 for j = 1:frames
-    pixelDifference = double(input(a, 1)) - double(input(a, j));%from formula (top)
-    s = double(pixelDifference) ./ grad(a, 1); %from formula (bottom)
-    displacement(j) = -s; % gradient direction is downwards
-    %To make consistent with photo, flip
+    [~, displacement(j, 1)] = shahbaziDelta(input(:,:,1), input(:,:,j));
+    loadingBar(j, frames, f);
 end
 
 time = frameRate*(1:frames)/frames;

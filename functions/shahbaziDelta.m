@@ -1,19 +1,17 @@
-function [outputArg1,outputArg2] = shahbaziDelta(inputArg1,inputArg2)
+function [deltaX,deltaY] = shahbaziDelta(first,second)
 %SHAHBAZIDELTA Summary of this function goes here
 %   Detailed explanation goes here
 
-It=double(rgb2gray(imread('I1.png'))); %new frame
-It=imresize(It,[20 20]); %resizes to help with computation
-figure;imshow(uint8(It)); truesize(gcf,[2000,2000]); hold on;
-x1=8.9835; y1=9.9987; % must set manually?
-plot(x1,y1,'r+'); % plots middle of target
+It=double(second); %new frame
+% figure;imshow(uint8(It)); truesize(gcf,[2000,2000]); hold on;
+% x1=8.9835; y1=9.9987; % must set manually?
+% plot(x1,y1,'r+'); % plots middle of target
 
-Itplus1_orig=double(rgb2gray(imread('I2.png'))); %reference frame
-Itplus1_orig=imresize(Itplus1_orig,[20 20]); %resizes to match input
+Itplus1_orig=double(first); %reference frame
+% Itplus1_orig=imresize(Itplus1_orig,[20 20]); %resizes to match input
+% these are same size, so we good
 
-
-
-MaxIter=100;
+MaxIter=100; %# of iterations for accuracy
 d=zeros(MaxIter+1,2);
 d(1,:)=[0 0]; % does nothing?
 
@@ -28,12 +26,12 @@ for counter=1:MaxIter
     %use first-order approximation
     [Gx, Gy] = imgradientxy(Itplus1,'central');
 
-    E_d=((Itplus1-It));
-    if counter==1
-        figure;imagesc(E_d); title(['Iteration ' num2str(counter) ': I_t_+_1(x+d)-I_t(x) at d= [' num2str(sum(d(1:counter,1))) ',' num2str(sum(d(1:counter,2))) ']']);
-        colorbar; 
-        axis equal;
-    end
+    % E_d=((Itplus1-It));
+%     if counter==1
+%         figure;imagesc(E_d); title(['Iteration ' num2str(counter) ': I_t_+_1(x+d)-I_t(x) at d= [' num2str(sum(d(1:counter,1))) ',' num2str(sum(d(1:counter,2))) ']']);
+%         colorbar; 
+%         axis equal;
+%     end
     
     for i=1:size(Itplus1,1)
         for j=1:size(Itplus1,2)
@@ -51,42 +49,42 @@ for counter=1:MaxIter
         end
     end
 
-    if counter==1
-        figure;
-        subplot(2,3,1);
-        imagesc(rondJ_tox_2);title('(\deltaI_t_+_1/\deltax)^2');
-        colorbar;
-        axis equal;
-
-        subplot(2,3,2);
-        imagesc(rondJ_tox_toy);  title('\deltaI_t_+_1/\deltax * \deltaI_t_+_1/\deltay');
-        colorbar;
-        axis equal;
-
-
-
-        subplot(2,3,3);
-        imagesc(Ed_x);title('E_x');
-        colorbar;
-        axis equal;
-
-
-        subplot(2,3,4);
-        imagesc(rondJ_tox_toy);title('\deltaI_t_+_1/\deltax * \deltaI_t_+_1/\deltay');
-        colorbar;
-        axis equal;
-
-
-        subplot(2,3,5);
-        imagesc(rondJ_toy_2); title('(\deltaI_t_+_1/\deltay)^2');
-        colorbar;
-        axis equal;
-
-        subplot(2,3,6);
-        imagesc(Ed_y);title('E_y');
-        colorbar;
-        axis equal;
-    end
+%     if counter==1
+%         figure;
+%         subplot(2,3,1);
+%         imagesc(rondJ_tox_2);title('(\deltaI_t_+_1/\deltax)^2');
+%         colorbar;
+%         axis equal;
+% 
+%         subplot(2,3,2);
+%         imagesc(rondJ_tox_toy);  title('\deltaI_t_+_1/\deltax * \deltaI_t_+_1/\deltay');
+%         colorbar;
+%         axis equal;
+% 
+% 
+% 
+%         subplot(2,3,3);
+%         imagesc(Ed_x);title('E_x');
+%         colorbar;
+%         axis equal;
+% 
+% 
+%         subplot(2,3,4);
+%         imagesc(rondJ_tox_toy);title('\deltaI_t_+_1/\deltax * \deltaI_t_+_1/\deltay');
+%         colorbar;
+%         axis equal;
+% 
+% 
+%         subplot(2,3,5);
+%         imagesc(rondJ_toy_2); title('(\deltaI_t_+_1/\deltay)^2');
+%         colorbar;
+%         axis equal;
+% 
+%         subplot(2,3,6);
+%         imagesc(Ed_y);title('E_y');
+%         colorbar;
+%         axis equal;
+%     end
     
     %Least square adjustment of displacement vector so that the energy can
     %be minimized
@@ -114,15 +112,15 @@ for counter=1:MaxIter
         
         if counter==MaxIter
             
-            figure;imagesc(E_d); title(['Iteration ' num2str(counter) ': I_t_+_1(x+d)-I_t(x) at d= [' num2str(sum(d(1:counter+1,1))) ',' num2str(sum(d(1:counter+1,2))) ']']);
-            colorbar; 
-            axis equal;
+            %figure;imagesc(E_d); title(['Iteration ' num2str(counter) ': I_t_+_1(x+d)-I_t(x) at d= [' num2str(sum(d(1:counter+1,1))) ',' num2str(sum(d(1:counter+1,2))) ']']);
+%             colorbar; 
+%             axis equal;
         end
     else
         
-        figure;imagesc(E_d); title(['Iteration ' num2str(counter) ': I_t_+_1(x+d)-I_t(x) at d= [' num2str(sum(d(1:counter,1))) ',' num2str(sum(d(1:counter,2))) ']']);
-        colorbar; 
-        axis equal;
+        %figure;imagesc(E_d); title(['Iteration ' num2str(counter) ': I_t_+_1(x+d)-I_t(x) at d= [' num2str(sum(d(1:counter,1))) ',' num2str(sum(d(1:counter,2))) ']']);
+%         colorbar; 
+%         axis equal;
         
         counter=MaxIter+1;
     end
@@ -131,13 +129,14 @@ end
 
 d_final=[sum(d(1:lastcount,1)), sum(d(1:lastcount,2))];
 
-x2=x1+d_final(1);
-y2=y1+d_final(2);
+% x2=x1+d_final(1);
+% y2=y1+d_final(2);
+% 
+% figure;imshow(uint8(Itplus1_orig));truesize(gcf,[2000,2000]); hold on;
+% plot(x2,y2,'b+');
 
-figure;imshow(uint8(Itplus1_orig));truesize(gcf,[2000,2000]); hold on;
-plot(x2,y2,'b+');
-
-    
+deltaX = d_final(1);
+deltaY = d_final(2);
 
 end
 

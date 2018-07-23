@@ -4,11 +4,8 @@ clear;
 
 [video, Fs] = getVideo();
 
-[vidLine, angle] = transformVideo(video);
-displacement = calculateDisplacements(vidLine, angle, Fs);
-
-%Display output
-imshow(vidLine, [0 255]);
+vid = transformVideo(video);
+displacement = calculateDisplacements(vid, Fs);
 
 freq = obtainFourierDomain(Fs, displacement);
 

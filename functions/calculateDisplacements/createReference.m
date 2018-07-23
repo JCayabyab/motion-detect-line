@@ -1,15 +1,15 @@
-function [line] = createReference(inputLine)
+function [reference] = createReference(inputVid)
 %CREATEREFERENCE This function takes a line-time image and creates a
 %reference image to compare displacements.
-[h, w] = size(inputLine); 
+[h, w, t] = size(inputVid); 
 
-line = zeros(h, 1, 'double');
+reference = zeros(h, w, 'double');
 
-for i = 1:w
-    nLine = inputLine(:, i);
-    nLine = double(nLine);
-    nLine = times(nLine, 1/w);
-    line = line + nLine;
+for i = 1:t
+    nVid = inputVid(:, :, i);
+    nVid = double(nVid);
+    nVid = times(nVid, 1/t);
+    reference = reference + nVid;
 end
 
 end
