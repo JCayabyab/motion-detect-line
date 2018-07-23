@@ -1,10 +1,8 @@
-function [disGraph] = calculateDisplacements(input, angle, frameRate)
+function [disGraph] = calculateDisplacements(input, frameRate)
 % CALCULATEDISPLACEMENTS Input a line-time photo
 % Outputs a displacement-time relationship
 
 reference = createReference(input);
-%[~, grad] = imgradientxy(reference);
-[~, grad] = imgradientxy(reference, 'central');
 
 [~, frames] = size(input);
 displacement = zeros(frames, 1);
@@ -24,9 +22,6 @@ for j = 1:frames
     %To make consistent with photo, flip
 end
 
-cosine = cos(angle);
-
-displacement = displacement/cosine;
 time = frameRate*(1:frames)/frames;
 time = time';
 
