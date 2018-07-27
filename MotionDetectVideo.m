@@ -2,7 +2,10 @@ clear;
 
 %% Declare data directory
 
-[video, Fs] = getVideo();
+[typeOfVid] = getType();
+
+
+[video, Fs] = getVideo(typeOfVid);
 
 vid = transformVideo(video);
 displacement = calculateDisplacements(vid, Fs);

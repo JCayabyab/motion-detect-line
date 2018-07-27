@@ -1,16 +1,23 @@
-function [fileName,filePath] = getFile()
+function [fileName,filePath] = getFile(type)
 %GETFILE Prompts user for file and saves name and path to variables.
 %   
-fileTypes = ['*.avi; *.mp4; *.mov; *.wmv; *.asf; *.asx; *.m4v; *.mj2; '...
+videoTypes = ['*.avi; *.mp4; *.mov; *.wmv; *.asf; *.asx; *.m4v; *.mj2; '...
     '*.mpg'];
-fileDesc = ['Video files (*.avi; *.mp4; *.mov; *.wmv; *.asf; *.asx; *.m4v; *.mj2; '...
+videoDesc = ['Video files (*.avi; *.mp4; *.mov; *.wmv; *.asf; *.asx; *.m4v; *.mj2; '...
     '*.mpg)'];
 
-[fileName, filePath] = uigetfile({fileTypes, fileDesc});
+imageTypes = '*.tif; *.tiff';
+imageDesc = 'Image files (*.tif; *.tiff)';
 
-if(fileName == 0)
-    return;
+if (type == 0)
+    [fileName, filePath] = uigetfile({videoTypes, videoDesc});
+else
+    [fileName, filePath] = uigetfile({imageTypes, imageDesc}, 'MultiSelect', 'on');
 end
+
+% if(fileName == null)
+%     return;
+% end
 
 end
 

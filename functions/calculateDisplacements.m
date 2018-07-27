@@ -15,7 +15,7 @@ for j = 1:frames
     loadingBar(j, frames, f);
 end
 
-time = frameRate*(1:frames)/frames;
+time = (1:frames)/frameRate;
 time = time';
 
 disGraph = zeros(frames, 2);

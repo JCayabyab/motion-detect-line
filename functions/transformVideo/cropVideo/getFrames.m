@@ -28,8 +28,12 @@ while (approved == 0)
         disp('Invalid frame input!');
         pause(2);
     else
-        figure('Name', 'Frame Comparison');
-        imshowpair(video(:,:,:,frame1), video(:,:,:,frame2), 'montage');
+        figure('Name', 'Frame Comparison', 'Position', [50 200 1500 500]);
+        subplot(1,2,1);
+        imshow(video(:,:,1,frame1), []);
+        subplot(1,2,2);
+        imshow(video(:,:,1,frame2), []);
+        
         answer = questdlg('Are these frames okay?', 'Frame Check',...
             'Yes', 'No', 'Yes');
         switch answer
