@@ -2,12 +2,12 @@ function [deltaX,deltaY] = shahbaziDelta(first,second)
 %SHAHBAZIDELTA Summary of this function goes here
 %   Detailed explanation goes here
 
-It=double(second); %new frame
+It=double(first); %reference frame
 % figure;imshow(uint8(It)); truesize(gcf,[2000,2000]); hold on;
 % x1=8.9835; y1=9.9987; % must set manually?
 % plot(x1,y1,'r+'); % plots middle of target
 
-Itplus1_orig=double(first); %reference frame
+Itplus1_orig=double(second); %first frame
 % Itplus1_orig=imresize(Itplus1_orig,[20 20]); %resizes to match input
 % these are same size, so we good
 

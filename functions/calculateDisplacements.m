@@ -1,4 +1,4 @@
-function [disGraph] = calculateDisplacements(input, frameRate)
+function [disGraphX, disGraphY] = calculateDisplacements(input, frameRate)
 % CALCULATEDISPLACEMENTS Input a line-time photo
 % Outputs a displacement-time relationship
 
@@ -6,20 +6,24 @@ function [disGraph] = calculateDisplacements(input, frameRate)
 % vid(:, :, 1) = reference;
 
 [~, ~, frames] = size(input);
-displacement = zeros(frames, 1);
+displacement = zeros(frames, 2);
 
 f = initializeLoadingBar();
 
 for j = 1:frames
-    [~, displacement(j, 1)] = shahbaziDelta(input(:,:,1), input(:,:,j));
+    [displacement(j, 1), displacement(j, 2)] = shahbaziDelta(input(:,:,1), input(:,:,j));
     loadingBar(j, frames, f);
 end
 
 time = (1:frames)/frameRate;
 time = time';
 
-disGraph = zeros(frames, 2);
-disGraph(:, 1) = displacement;
-disGraph(:, 2) = time;
+disGraphX = zeros(frames, 2);
+disGraphX(:, 2) = displacement(:, 1);
+disGraphX(:, 1) = time;
+
+disGraphY = zeros(frames, 2);
+disGraphY(:, 2) = displacement(:, 2);
+disGraphY(:, 1) = time;
 
 end

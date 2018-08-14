@@ -4,7 +4,7 @@ function type = getType()
 answer = questdlg('Video or Series of Images?', 'Type of Video',...
     'Video', 'Images', 'Video');
 switch answer
-    case 'Videos'
+    case 'Video'
         type = 0;
     case 'Images'
         type = 1;

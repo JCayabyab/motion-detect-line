@@ -4,12 +4,13 @@ clear;
 
 [typeOfVid] = getType();
 
-
 [video, Fs] = getVideo(typeOfVid);
 
 vid = transformVideo(video);
-displacement = calculateDisplacements(vid, Fs);
+[displacementX, displacementY] = calculateDisplacements(vid, Fs);
 
-freq = obtainFourierDomain(Fs, displacement);
+freq = obtainFourierDomain(Fs, displacementY);
 
-plotData(displacement, freq);
+writeDataToText(displacementX, displacementY);
+plotData(displacementY, freq);
+plotData(displacementX, freq);
